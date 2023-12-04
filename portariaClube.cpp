@@ -79,17 +79,6 @@ void enfileirar(FilaPortaria& fila, const RegistroPortaria& registro) {
     }
 }
 
-bool desenfileirar(FilaPortaria& fila, RegistroPortaria& registro) {
-    if (fila.frente != fila.fundo) {
-        registro = fila.registros[fila.frente];
-        fila.frente = (fila.frente + 1) % MAX_SOCIOS;
-        return true;
-    } else {
-        std::cout << "A fila está vazia." << std::endl;
-        return false;
-    }
-}
-
 void inicializarSocios(ListaSocios& lista) {
     Socio socio1 = {1001, "Solange", "Lucas", "Renan", true};
     Socio socio2 = {1002, "Maria", "Luana", "Davi", true};
@@ -98,17 +87,6 @@ void inicializarSocios(ListaSocios& lista) {
     inserirSocio(lista, socio1);
     inserirSocio(lista, socio2);
     inserirSocio(lista, socio3);
-}
-
-void gerarRelatorio(const FilaPortaria& fila) {
-    std::cout << "Relatório de visitas no dia:" << std::endl;
-
-    int i = fila.frente;
-    while (i != fila.fundo) {
-        std::cout << fila.registros[i].numeroTitulo << " - " << fila.registros[i].nome << " - "
-                  << (fila.registros[i].entrada ? "Entrada" : "Saída") << std::endl;
-        i = (i + 1) % MAX_SOCIOS;
-    }
 }
 
 int main() {
@@ -141,9 +119,9 @@ int main() {
                 std::cin >> novoSocio.numeroTitulo;
                 std::cout << "Nome do Titular: ";
                 std::cin >> novoSocio.nomeTitular;
-                std::cout << "Número do Dependente 1: ";
+                std::cout << "Nome do Dependente 1: ";
                 std::cin >> novoSocio.nomeDependente1;
-                std::cout << "Número do Dependente 2: ";
+                std::cout << "Nome do Dependente 2: ";
                 std::cin >> novoSocio.nomeDependente2;
                 std::cout << "Mensalidade em Dia (1 para Sim, 0 para Não): ";
                 std::cin >> novoSocio.mensalidadeEmDia;
@@ -165,7 +143,6 @@ int main() {
                 break;
             }
             case 4:
-                gerarRelatorio(filaPortaria);
                 break;
         }
     } while (opcao != 0);
