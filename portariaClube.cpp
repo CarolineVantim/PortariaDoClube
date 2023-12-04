@@ -1,14 +1,15 @@
 #include <iostream>
 #include <fstream>
-#include <string>
+
+using namespace std;
 
 const int MAX_SOCIOS = 5;
 
 struct Socio {
     int numeroTitulo;
-    std::string nomeTitular;
-    std::string nomeDependente1;
-    std::string nomeDependente2;
+    string nomeTitular;
+    string nomeDependente1;
+    string nomeDependente2;
     bool mensalidadeEmDia;
 };
 
@@ -36,13 +37,13 @@ void inserirSocio(ListaSocios& lista, const Socio& novoSocio) {
     if (lista.numSocios < MAX_SOCIOS) {
         lista.socios[lista.numSocios++] = novoSocio;
     } else {
-        std::cout << "Capacidade máxima de sócios atingida." << std::endl;
+        cout << "Capacidade máxima de sócios atingida." << std::endl;
     }
 }
 
 void listarSocios(const ListaSocios& lista) {
     for (int i = 0; i < lista.numSocios; ++i) {
-        std::cout << "Número do Título: " << lista.socios[i].numeroTitulo << "\tNome do Titular: " << lista.socios[i].nomeTitular << std::endl;
+        cout << "Número do Título: " << lista.socios[i].numeroTitulo << "\tNome do Titular: " << lista.socios[i].nomeTitular << endl;
     }
 }
 
@@ -60,9 +61,9 @@ void removerSocio(ListaSocios& lista, int numeroTitulo) {
             lista.socios[i] = lista.socios[i + 1];
         }
         --lista.numSocios;
-        std::cout << "Sócio removido com sucesso." << std::endl;
+        cout << "Sócio removido com sucesso." << std::endl;
     } else {
-        std::cout << "Sócio não encontrado." << std::endl;
+        cout << "Sócio não encontrado." << std::endl;
     }
 }
 
@@ -75,7 +76,7 @@ void enfileirar(FilaPortaria& fila, const RegistroPortaria& registro) {
         fila.registros[fila.fundo] = registro;
         fila.fundo = (fila.fundo + 1) % MAX_SOCIOS;
     } else {
-        std::cout << "A fila está cheia." << std::endl;
+        cout << "A fila está cheia." << std::endl;
     }
 }
 
@@ -99,8 +100,8 @@ int main() {
 
     int opcao;
     do {
-        std::cout << "\nMenu:\n1. Listar Sócios\n2. Remover Sócio\n3. Processar Portaria\n4. Gerar Relatório\n0. Sair\nEscolha uma opção: ";
-        std::cin >> opcao;
+        cout << "\nMenu:\n1. Listar Sócios\n2. Remover Sócio\n3. Processar Portaria\n4. Gerar Relatório\n0. Sair\nEscolha uma opção: ";
+        cin >> opcao;
 
         switch (opcao) {
             case 1:
@@ -108,23 +109,23 @@ int main() {
                 break;
             case 2: {
                 int numeroTitulo;
-                std::cout << "Digite o número do título do sócio a ser removido: ";
-                std::cin >> numeroTitulo;
+                cout << "Digite o número do título do sócio a ser removido: ";
+                cin >> numeroTitulo;
                 removerSocio(listaSocios, numeroTitulo);
                 break;
             }
             case 3: {
                 Socio novoSocio;
-                std::cout << "Número do Título: ";
-                std::cin >> novoSocio.numeroTitulo;
-                std::cout << "Nome do Titular: ";
-                std::cin >> novoSocio.nomeTitular;
-                std::cout << "Nome do Dependente 1: ";
-                std::cin >> novoSocio.nomeDependente1;
-                std::cout << "Nome do Dependente 2: ";
-                std::cin >> novoSocio.nomeDependente2;
-                std::cout << "Mensalidade em Dia (1 para Sim, 0 para Não): ";
-                std::cin >> novoSocio.mensalidadeEmDia;
+                cout << "Número do Título: ";
+                cin >> novoSocio.numeroTitulo;
+                cout << "Nome do Titular: ";
+                cin >> novoSocio.nomeTitular;
+                cout << "Nome do Dependente 1: ";
+                cin >> novoSocio.nomeDependente1;
+                cout << "Nome do Dependente 2: ";
+                cin >> novoSocio.nomeDependente2;
+                cout << "Mensalidade em Dia (1 para Sim, 0 para Não): ";
+                cin >> novoSocio.mensalidadeEmDia;
 
                 inserirSocio(listaSocios, novoSocio);
 
@@ -133,13 +134,13 @@ int main() {
                 registro.nome = novoSocio.nomeTitular;
 
                 char opcao;
-                std::cout << "Entrada ou saída (E/S): ";
-                std::cin >> opcao;
+                cout << "Entrada ou saída (E/S): ";
+                cin >> opcao;
 
                 registro.entrada = (opcao == 'E' || opcao == 'e');
 
                 enfileirar(filaPortaria, registro);
-                std::cout << "Registro realizado com sucesso." << std::endl;
+                cout << "Registro realizado com sucesso." << std::endl;
                 break;
             }
             case 4:

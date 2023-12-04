@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "*.vue": "html",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "iostream": "cpp"
     }
 }
